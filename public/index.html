@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>推理ノベル選択式クイズ</title>
+  <style>
+    body {
+      background: #111 url('dark_bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #eee;
+      font-family: "Shippori Mincho", serif;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #00ffff;
+      margin-bottom: 30px;
+    }
+
+    .question-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background: #222;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background: #00bfff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0099cc;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>これまでの推理をまとめよう</h1>
+
+  <div class="question-box">
+    <p>① 噂好きの女の子によると、監視カメラには、犯行当時は誰も映っていなかったが、それは本当だろうか？</p>
+    <select id="q1">
+      <option value="">-- 選択してください --</option>
+      <option value="本当の情報">本当の情報</option>
+      <option value="捏造された情報">捏造された情報</option>
+      <option value="女の子の勘違い">女の子の勘違い</option>
+    </select>
+  </div>
+
+  <div class="question-box">
+    <p>② 犯行に加担した人物は誰だろうか？</p>
+    <select id="q2">
+      <option value="">-- 選択してください --</option>
+      <option value="一条アンナ">一条アンナ</option>
+      <option value="安堂フミコ">安堂フミコ</option>
+      <option value="綾小路セラ">綾小路セラ</option>
+    </select>
+  </div>
+
+  <div class="question-box">
+    <p>② 被害者を殺害した人物は誰だろうか？</p>
+    <select id="q3">
+      <option value="">-- 選択してください --</option>
+      <option value="一条アンナ">一条アンナ</option>
+      <option value="安堂フミコ">安堂フミコ</option>
+      <option value="綾小路セラ">綾小路セラ</option>
+    </select>
+  </div>
+
+  <button onclick="checkAnswers()">推理する</button>
+
+  <div id="result"></div>
+
+  <script>
+    function checkAnswers() {
+      const q1 = document.getElementById("q1").value;
+      const q2 = document.getElementById("q2").value;
+      const q3 = document.getElementById("q3").value;
+
+      const result = document.getElementById("result");
+
+      const isCorrect = q1 === "捏造された情報" && q2 === "安堂フミコ" && q3 === "一条アンナ";
+
+      if (!q1 || !q2 || !q3) {
+        result.innerHTML = "すべての選択肢を選んでください。";
+        result.style.color = "#ffcc00";
+      } else if (isCorrect) {
+        result.innerHTML = "🎉 そうだ。安堂フミコが監視カメラの映像を偽造して、一条アンナの犯行を手助けしたんだ。それぞれがカレンを殺す動機を持っていたから・・・<br>※チャプターに戻ってシナリオを進めよう。";
+        result.style.color = "#00ff88";
+      } else {
+        result.innerHTML = "❌ 推理が外れたようだ…もう一度考えてみて。";
+        result.style.color = "#ff6666";
+      }
+    }
+  </script>
+
+</body>
+</html>
